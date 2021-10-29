@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello world!!!</title>
+    </head>
+    <body>
+
+    {% for teamDivision in leagueInfoList|keys %}
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th colspan="10">Division {{ teamDivision }}</th>
+            </tr>
+                <tr>
+                    <th rowspan="1">Teams</th>
+                    {% for teamInfo in leagueInfoList[teamDivision]%}
+                        <td rowspan="1">{{ teamInfo.teamName }}</td>
+                    {% endfor %}
+                    <td rowspan="1">Score</td>
+                </tr>
+
+                {% for teamInfo in leagueInfoList[teamDivision]%}
+                    <tr>
+                        <td>{{ teamInfo.teamName }}</td>
+
+                        {% for teamScore in teamInfo.scores %}
+                            <td>
+                                {% if (teamScore is defined and teamScore is not null) %}
+                                    {{ teamScore }} {% if (teamScore == 1) %} : 0 {% else %} : 1 {% endif %}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+
+                        <td>{{ teamInfo.scoreResult }}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+    {% endfor %}
+
+    <table border="1" cellpadding="7" cellspacing="0">
+        <tr>
+            <th colspan="1"></th>
+            <th colspan="1"></th>
+            <th colspan="1">Semi-final</th>
+            <th colspan="1"></th>
+            <th colspan="1">Final</th>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[0].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[0].firstTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[0].firstTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[0].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[0].secondTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[0].secondTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.semiFinal[0].firstTeam.teamId }} (Division {{ playoffInfoList.semiFinal[0].firstTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.semiFinal[0].firstTeam.score }}
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.semiFinal[0].secondTeam.teamId }} (Division {{ playoffInfoList.semiFinal[0].secondTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.semiFinal[0].secondTeam.score }}
+            </td>
+            <th>Winners</th>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[1].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[1].firstTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[1].firstTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.final.winners[0].teamId }} (Division {{ playoffInfoList.final.winners[0].divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.final.winners[0].score }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[1].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[1].secondTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[1].secondTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.final.winners[1].teamId }} (Division {{ playoffInfoList.final.winners[1].divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.final.winners[1].score }}
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Losers</th>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[2].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[2].firstTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[2].firstTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.final.losers[0].teamId }} (Division {{ playoffInfoList.final.losers[0].divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.final.losers[0].score }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[2].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[2].secondTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[2].secondTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.final.losers[1].teamId }} (Division {{ playoffInfoList.final.losers[1].divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.final.losers[1].score }}
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.semiFinal[1].firstTeam.teamId }} (Division {{ playoffInfoList.semiFinal[1].firstTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.semiFinal[1].firstTeam.score }}
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                Team {{ playoffInfoList.semiFinal[1].secondTeam.teamId }} (Division {{ playoffInfoList.semiFinal[1].secondTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.semiFinal[1].secondTeam.score }}
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[3].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[3].firstTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[3].firstTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[3].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[3].secondTeam.divisionName }})
+            </td>
+            <td>
+                {{ playoffInfoList.quarterFinal[3].secondTeam.score }}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <table border="1" cellpadding="7" cellspacing="0">
+        <tr>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[0].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[0].firstTeam.divisionName }}) {{ playoffInfoList.quarterFinal[0].firstTeam.score }} : {{ playoffInfoList.quarterFinal[0].secondTeam.score }} Team {{ playoffInfoList.quarterFinal[0].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[0].secondTeam.divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[1].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[1].firstTeam.divisionName }}) {{ playoffInfoList.quarterFinal[1].firstTeam.score }} : {{ playoffInfoList.quarterFinal[1].secondTeam.score }} Team {{ playoffInfoList.quarterFinal[1].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[1].secondTeam.divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[2].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[2].firstTeam.divisionName }}) {{ playoffInfoList.quarterFinal[2].firstTeam.score }} : {{ playoffInfoList.quarterFinal[2].secondTeam.score }} Team {{ playoffInfoList.quarterFinal[2].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[2].secondTeam.divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.quarterFinal[3].firstTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[3].firstTeam.divisionName }}) {{ playoffInfoList.quarterFinal[3].firstTeam.score }} : {{ playoffInfoList.quarterFinal[3].secondTeam.score }} Team {{ playoffInfoList.quarterFinal[3].secondTeam.teamId }} (Division {{ playoffInfoList.quarterFinal[3].secondTeam.divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.semiFinal[0].firstTeam.teamId }} (Division {{ playoffInfoList.semiFinal[0].firstTeam.divisionName }}) {{ playoffInfoList.semiFinal[0].firstTeam.score }} : {{ playoffInfoList.semiFinal[0].secondTeam.score }} Team {{ playoffInfoList.semiFinal[0].secondTeam.teamId }} (Division {{ playoffInfoList.semiFinal[0].secondTeam.divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.semiFinal[1].firstTeam.teamId }} (Division {{ playoffInfoList.semiFinal[1].firstTeam.divisionName }}) {{ playoffInfoList.semiFinal[1].firstTeam.score }} : {{ playoffInfoList.semiFinal[1].secondTeam.score }} Team {{ playoffInfoList.semiFinal[1].secondTeam.teamId }} (Division {{ playoffInfoList.semiFinal[1].secondTeam.divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.final.winners[0].teamId }} (Division {{ playoffInfoList.final.winners[0].divisionName }}) {{ playoffInfoList.final.winners[0].score }} : {{ playoffInfoList.final.winners[1].score }} Team {{ playoffInfoList.final.winners[1].teamId }} (Division {{ playoffInfoList.final.winners[1].divisionName }})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team {{ playoffInfoList.final.losers[0].teamId }} (Division {{ playoffInfoList.final.losers[0].divisionName }}) {{ playoffInfoList.final.losers[0].score }} : {{ playoffInfoList.final.losers[1].score }} Team {{ playoffInfoList.final.losers[1].teamId }} (Division {{ playoffInfoList.final.losers[1].divisionName }})
+            </td>
+        </tr>
+    </table>
+    </body>
+</html>
